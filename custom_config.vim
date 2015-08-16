@@ -148,15 +148,16 @@ nmap <C-CR> :e<Space><C-R><C-A><CR>
 "------------------------------------------------------------------------------
 " tags generator
 "------------------------------------------------------------------------------
-
 au FileType go imap <C-F12> <Esc>:!gotags -R -sort -silent -f tags . $GOPATH $GOROOT<CR>a
 au FileType go nmap <C-F12> :!gotags -R -sort -silent -f tags . $GOPATH $GOROOT<CR>
+au FileType go nmap <Leader>tags :!gotags -R -sort -silent -f tags . $GOPATH $GOROOT<CR>
 
 "------------------------------------------------------------------------------
 " GUI setup
 "------------------------------------------------------------------------------
 if has("gui_running")
-    set guifont=Droid\ Sans\ Mono\ 10
+    " set guifont=Droid\ Sans\ Mono\ 10
+    set guifont=Droid\ Sans\ Mono\ 9
     set guioptions-=r  "remove right-hand scroll bar
     set guioptions-=L  "remove left-hand scroll bar
 endif
