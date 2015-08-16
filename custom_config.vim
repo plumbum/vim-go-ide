@@ -149,8 +149,8 @@ nmap <C-CR> :e<Space><C-R><C-A><CR>
 " tags generator
 "------------------------------------------------------------------------------
 
-au FileType go imap <C-F12> <Esc>:!gotags -R -sort -silent -f ctags . $GOPATH $GOROOT<CR>a
-au FileType go nmap <C-F12> :!gotags -R -sort -silent -f ctags . $GOPATH $GOROOT<CR>
+au FileType go imap <C-F12> <Esc>:!gotags -R -sort -silent -f tags . $GOPATH $GOROOT<CR>a
+au FileType go nmap <C-F12> :!gotags -R -sort -silent -f tags . $GOPATH $GOROOT<CR>
 
 "------------------------------------------------------------------------------
 " GUI setup
