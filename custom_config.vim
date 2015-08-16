@@ -39,6 +39,33 @@ let g:tagbar_width = 30     " Window width
 let g:tagbar_iconchars = ['▶', '◢']     " display arrows instead +/-
 let g:tagbar_sort = 0       " sorting disabled
 
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
 nmap <silent> <F3> :TagbarToggle<CR>
 imap <silent> <F3> <Esc>:TagbarToggle<CR>
@@ -46,14 +73,11 @@ imap <silent> <F3> <Esc>:TagbarToggle<CR>
 nmap <silent> <S-F3> :NERDTreeToggle<CR>
 imap <silent> <S-F3> <Esc>:NERDTreeToggle<CR>
 
-
 nmap <leader>O :TagbarToggle<CR>
-
-" Toggle folds
-nmap <space> za
 
 
 "------------------------------------------------------------------------------
+" Clipboard shortcuts
 "------------------------------------------------------------------------------
 " Copy to global clipboard 
 vmap <C-c> "+yi
@@ -120,6 +144,21 @@ nmap <M-Right> :tabnext<CR>
 imap <C-CR> <Esc>:e<Space><C-R><C-A><CR>
 nmap <C-CR> :e<Space><C-R><C-A><CR>
 
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
+
+"------------------------------------------------------------------------------
+" tags generator
+"------------------------------------------------------------------------------
+
+au FileType go imap <C-F12> <Esc>:!gotags -R -sort -silent -f ctags . $GOPATH $GOROOT<CR>a
+au FileType go nmap <C-F12> :!gotags -R -sort -silent -f ctags . $GOPATH $GOROOT<CR>
+
+"------------------------------------------------------------------------------
+" GUI setup
+"------------------------------------------------------------------------------
+if has("gui_running")
+    set guifont=Droid\ Sans\ Mono\ 10
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
+endif
+
 
