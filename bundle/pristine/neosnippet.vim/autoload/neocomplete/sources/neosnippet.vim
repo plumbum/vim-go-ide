@@ -36,14 +36,8 @@ let s:source = {
       \          ['matcher_fuzzy'] : ['matcher_head']),
       \}
 
-function! s:source.hooks.on_init(context) "{{{
-  " Initialize.
-  call neosnippet#util#set_default(
-        \ 'g:neosnippet#enable_preview', 0)
-endfunction"}}}
-
 function! s:source.gather_candidates(context) "{{{
-  let snippets = values(neosnippet#helpers#get_snippets())
+  let snippets = values(neosnippet#helpers#get_completion_snippets())
   if matchstr(a:context.input, '\S\+$') !=#
         \ matchstr(a:context.input, '\w\+$')
     " Word filtering
@@ -57,9 +51,6 @@ function! s:source.hooks.on_post_filter(context) "{{{
     let snippet.dup = 1
     let snippet.menu = neosnippet#util#strwidthpart(
           \ snippet.menu_template, winwidth(0)/3)
-    if g:neosnippet#enable_preview
-      let snippet.info = snippet.snip
-    endif
   endfor
 
   return a:context.candidates
